@@ -13,4 +13,4 @@ jobs:
         with:
           args: "--id DangerKotlinAction"
         env:
-          DANGER_GITHUB_API_TOKEN: ${{ secrets.DANGER_GITHUB_API_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
