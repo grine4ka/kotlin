@@ -27,6 +27,8 @@ danger(args) {
     SamplePlugin.myCustomCheck()
 
     onGitHub {
+        warn("Showing git diff for demonstration: \n${git.diff}")
+
         val isTrivial = pullRequest.title.contains("#trivial")
 
         // Changelog
