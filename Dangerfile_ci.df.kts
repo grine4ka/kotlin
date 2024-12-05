@@ -27,7 +27,12 @@ danger(args) {
     SamplePlugin.myCustomCheck()
 
     onGitHub {
-        warn("Showing git diff for demonstration: \n${git.diff}")
+        markdown("### Hello from GitHub")
+        markdown("Git diff for PR: ${git.diff}")
+        markdown("Git baseSha for PR: ${git.baseSha}")
+        markdown("Git headSha for PR: ${git.headSha}")
+
+        warn("Showing git diff for demonstration: ${git.diff}")
 
         val isTrivial = pullRequest.title.contains("#trivial")
 
