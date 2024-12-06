@@ -25,6 +25,8 @@ internal class ShellExecutorImpl : ShellExecutor {
         val process = Runtime.getRuntime().exec(arrayOf("/bin/bash", "-c", commandWithArgs))
         process.waitFor()
 
+        println("Errors: ${process.errorStream.bufferedReader().readText()}")
+
         return process.inputStream.bufferedReader().readText()
     }
 }

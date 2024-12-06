@@ -30,7 +30,9 @@ danger(args) {
         markdown("### Demostate Git Diff")
         markdown("Git baseSha for PR: ${git.baseSha}")
         markdown("Git headSha for PR: ${git.headSha}")
-        markdown("Git diff for PR (`git diff $baseSha $headSha`): ${git.diff}")
+        val changedLines = git.changedLines
+        markdown("Git diff for PR (`git diff $baseSha $headSha`): ${changedLines.diff}")
+        markdown("Additions and deletions are (`git diff --numstat $baseSha $headSha`): ${changedLines.additions} and ${changedLines.deletions}")
 
         val isTrivial = pullRequest.title.contains("#trivial")
 
