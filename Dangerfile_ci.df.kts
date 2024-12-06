@@ -6,7 +6,7 @@
 @file:DependsOn("org.apache.commons:commons-text:1.6")
 
 //Testing plugin
-@file:DependsOn("danger-kotlin-sample-plugin-sample.jar")
+@file:DependsOn("danger-kotlin-sample-plugin/build/libs/danger-kotlin-sample-plugin-sample.jar")
 
 import kotlinx.coroutines.async
 import kotlinx.coroutines.delay
@@ -27,12 +27,10 @@ danger(args) {
     SamplePlugin.myCustomCheck()
 
     onGitHub {
-        markdown("### Hello from GitHub")
-        markdown("Git diff for PR: ${git.diff}")
+        markdown("### Demostate Git Diff")
         markdown("Git baseSha for PR: ${git.baseSha}")
         markdown("Git headSha for PR: ${git.headSha}")
-
-        warn("Showing git diff for demonstration: ${git.diff}")
+        markdown("Git diff for PR (`git diff $baseSha $headSha`): ${git.diff}")
 
         val isTrivial = pullRequest.title.contains("#trivial")
 
