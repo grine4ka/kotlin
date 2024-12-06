@@ -11,6 +11,7 @@
 
 -->
 ## Master
+- Fix working with raw git diff [@grine4ka] - [#295](https://github.com/danger/kotlin/pull/295)
 - Update README.md with guidance to enable auto-complete in Android Studio [@gianluz] - [#242](https://github.com/danger/kotlin/pull/242)
 - Update install script with Kotlin compiler 1.7.0 [@gianluz] - [#241](https://github.com/danger/kotlin/pull/241)
 - Add accessors for Danger reports [@417-72KI] - [#245](https://github.com/danger/kotlin/pull/245)
