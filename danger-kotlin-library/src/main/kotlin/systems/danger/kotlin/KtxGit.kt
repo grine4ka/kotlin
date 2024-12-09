@@ -12,7 +12,7 @@ val Git.changedLines: PullRequestChangedLines
     get() {
         if (headSha == null || baseSha == null) return PullRequestChangedLines(0, 0)
         val shellExecutor = ShellExecutorFactory.get()
-        val commandRawOutput = shellExecutor.execute("git diff --numstat $headSha $baseSha")
+        val commandRawOutput = shellExecutor.execute("git diff --numstat $baseSha $headSha")
         val additionDeletionPairs = commandRawOutput.lines()
             .filter { it.isNotEmpty() }
             .map { line ->
@@ -21,7 +21,7 @@ val Git.changedLines: PullRequestChangedLines
             }
         val additions = additionDeletionPairs.fold(0) { acc, (_, addition) -> acc + addition }
         val deletions = additionDeletionPairs.fold(0) { acc, (deletion, _) -> acc + deletion }
-        val commandRawDiffOutput = shellExecutor.execute("git diff $headSha $baseSha")
+        val commandRawDiffOutput = shellExecutor.execute("git diff $baseSha $headSha")
         return PullRequestChangedLines(additions, deletions, commandRawDiffOutput)
     }
 
