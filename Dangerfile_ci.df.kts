@@ -75,7 +75,6 @@ danger(args) {
     @OptIn(kotlin.time.ExperimentalTime::class)
     val runningTime = after.minus(before)
     @OptIn(kotlin.time.ExperimentalTime::class)
-
     message("Coroutines checks terminated - runningFor $runningTime")
 
     if ((fails + warnings).isEmpty()) {
