@@ -6,7 +6,7 @@
 @file:DependsOn("org.apache.commons:commons-text:1.6")
 
 //Testing plugin
-@file:DependsOn("danger-kotlin-sample-plugin/build/libs/danger-kotlin-sample-plugin-sample.jar")
+@file:DependsOn("danger-kotlin-sample-plugin-sample.jar")
 
 import kotlinx.coroutines.async
 import kotlinx.coroutines.delay
@@ -19,7 +19,6 @@ import systems.danger.samples.plugin.SamplePlugin
 
 register plugin SamplePlugin
 
-@OptIn(kotlin.time.ExperimentalTime::class)
 danger(args) {
     val allSourceFiles = git.modifiedFiles + git.createdFiles
     val changelogChanged = allSourceFiles.contains("CHANGELOG.md")
@@ -73,7 +72,9 @@ danger(args) {
         async { expensiveCheck("4", 5000) }
     }
     val after = Clock.System.now()
+    @OptIn(kotlin.time.ExperimentalTime::class)
     val runningTime = after.minus(before)
+    @OptIn(kotlin.time.ExperimentalTime::class)
 
     message("Coroutines checks terminated - runningFor $runningTime")
 
