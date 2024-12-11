@@ -27,6 +27,14 @@ danger(args) {
     SamplePlugin.myCustomCheck()
 
     onGitHub {
+        markdown("### Demostate Git Diff")
+        markdown("Git baseSha for PR: ${git.baseSha}")
+        markdown("Git headSha for PR: ${git.headSha}")
+        val changedLines = git.changedLines
+        markdown("Git diff for PR (`git diff ${git.headSha} ${git.baseSha}`):")
+        markdown("```${changedLines.diff}```")
+        markdown("(`git diff --numstat ${git.headSha} ${git.baseSha}`): additions: ${changedLines.additions}, deletions: ${changedLines.deletions}")
+
         val isTrivial = pullRequest.title.contains("#trivial")
 
         // Changelog
