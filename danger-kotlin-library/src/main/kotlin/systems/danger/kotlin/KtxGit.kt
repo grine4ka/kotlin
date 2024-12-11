@@ -1,6 +1,7 @@
 package systems.danger.kotlin
 
 import systems.danger.kotlin.models.git.Git
+import systems.danger.kotlin.models.git.GitCommit
 import systems.danger.kotlin.tools.shell.ShellExecutorFactory
 
 // extensions over [Git] object
@@ -48,13 +49,13 @@ val Git.deletions: Int
  * Reference to a SHA of head commit of this PR
  */
 val Git.headSha: String?
-    get() = commits.lastOrNull()?.sha
+    get() = commits.sortDescendingByAuthorDate().lastOrNull()?.sha
 
 /**
  * Reference to a SHA of base commit of this PR
  */
 val Git.baseSha: String?
-    get() = commits.firstOrNull()?.sha?.let { "$it^1" }
+    get() = commits.sortDescendingByAuthorDate().firstOrNull()?.sha?.let { "$it^1" }
 
 /**
  * Unified diff of this PR 
@@ -75,3 +76,7 @@ data class PullRequestChangedLines(
     val deletions: Int,
     val diff: String? = null
 )
+
+private fun List<GitCommit>.sortDescendingByAuthorDate(): List<GitCommit> {
+    return sortedByDescending { it.author.date }
+}
