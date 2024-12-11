@@ -49,13 +49,13 @@ val Git.deletions: Int
  * Reference to a SHA of head commit of this PR
  */
 val Git.headSha: String?
-    get() = commits.sortDescendingByAuthorDate().lastOrNull()?.sha
+    get() = commits.sortChronologically().lastOrNull()?.sha
 
 /**
  * Reference to a SHA of base commit of this PR
  */
 val Git.baseSha: String?
-    get() = commits.sortDescendingByAuthorDate().firstOrNull()?.sha?.let { "$it^1" }
+    get() = commits.sortChronologically().firstOrNull()?.sha?.let { "$it^1" }
 
 /**
  * Unified diff of this PR 
@@ -77,6 +77,6 @@ data class PullRequestChangedLines(
     val diff: String? = null
 )
 
-private fun List<GitCommit>.sortDescendingByAuthorDate(): List<GitCommit> {
-    return sortedByDescending { it.author.date }
+private fun List<GitCommit>.sortChronologically(): List<GitCommit> {
+    return sortedBy { it.author.date }
 }
