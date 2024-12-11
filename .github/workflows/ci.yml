@@ -13,6 +13,8 @@ jobs:
     
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 20
 
       - uses: sdkman/sdkman-action@master
         with:
@@ -35,15 +37,6 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22.10.0'
-
-      - name: Install libncurses5
-        run: |
-          if [[ "$OSTYPE" == "darwin"* ]]
-          then
-            brew install ncurses
-          else
-            sudo apt-get install libncurses5
-          fi
 
       - name: Install Danger JS
         run: npm install -g danger
